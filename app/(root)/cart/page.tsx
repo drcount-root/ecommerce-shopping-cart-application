@@ -4,7 +4,6 @@ import React from "react";
 import { useAppSelector } from "@/lib/store/hooks";
 import CartItems from "@/components/CartItems";
 import CartSummary from "@/components/CartSummary";
-// import CartSummary from "./components/cart-summary";
 
 const Cart = () => {
   const cartItems = useAppSelector((state) => state.cart.items) || [];
@@ -26,7 +25,6 @@ const Cart = () => {
           </div>
           <div className="flex-1">
             <CartSummary />
-            summary
           </div>
         </div>
       </div>
