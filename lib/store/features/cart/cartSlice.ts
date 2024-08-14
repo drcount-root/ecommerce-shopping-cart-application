@@ -7,10 +7,12 @@ interface CartItem {
 
 export interface CartState {
   items: CartItem[];
+  coupon: string;
 }
 
 const initialState: CartState = {
   items: [],
+  coupon: "",
 };
 
 export const cartSlice = createSlice({
@@ -39,8 +41,9 @@ export const cartSlice = createSlice({
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
-        } else {
-          item.quantity = 1;
+        } 
+        else {
+          state.items = state.items.filter((item) => item.id !== itemId);
         }
       }
     },
@@ -48,10 +51,20 @@ export const cartSlice = createSlice({
       const itemId = action.payload;
       state.items = state.items.filter((item) => item.id !== itemId);
     },
+
+    applyCouponCode: (state, action: PayloadAction<string>) => {
+      const couponCode = action.payload;
+      state.coupon = couponCode;
+    },
   },
 });
 
-export const { addToCart, increaseQuantity, decreaseQuantity, removeFromCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeFromCart,
+  applyCouponCode,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

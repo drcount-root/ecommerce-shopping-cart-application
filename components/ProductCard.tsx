@@ -43,11 +43,11 @@ const ProductCard = ({
           className="object-cover w-full h-full"
           width={100}
           height={100}
-          //   fill
         />
       </div>
       <div className="px-2 pt-3 text-sm absolute bottom-0 left-0 right-0 transition-transform transform group-hover:translate-y-[-15px] bg-white">
         <p className="line-clamp-1">{title}</p>
+        <p className="line-clamp-1 text-xs my-1">{description}</p>
         <div className="w-[80px] h-[10px] relative italic font-medium text-xs text-blue-500">
           Assured
         </div>
