@@ -9,13 +9,11 @@ import {
   decreaseQuantity,
   removeFromCart,
 } from "@/lib/store/features/cart/cartSlice";
-import { ProductInterface } from "@/interfaces";
-
-interface CartItemsProps {
-  cartItems: any;
-  cartData: ProductInterface[];
-  currency: string;
-}
+import {
+  CartItemInterface,
+  CartItemsProps,
+  ProductInterface,
+} from "@/interfaces";
 
 const CartItems = ({ cartItems, cartData, currency }: CartItemsProps) => {
   const dispatch = useAppDispatch();
@@ -27,13 +25,16 @@ const CartItems = ({ cartItems, cartData, currency }: CartItemsProps) => {
   const handleRemoveFromCart = (itemId: number) =>
     dispatch(removeFromCart(itemId));
 
+  console.log("cartItemsxs", cartItems)
+
   return (
     <div className="pt-4">
       <ul>
         {cartData?.map((item: ProductInterface) => {
-          const itemInCart = cartItems.find(
-            (cartItem: any) => cartItem?.id === item?.id
-          );
+          const itemInCart = cartItems.find((cartItem: CartItemInterface) => {
+            console.log("cartItem", cartItem);
+            return cartItem?.id === item?.id;
+          });
           return (
             <li
               key={item?.id}

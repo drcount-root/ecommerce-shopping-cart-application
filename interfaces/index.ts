@@ -9,5 +9,21 @@ export interface ProductInterface {
     rate: number;
     count: number;
   };
-  currency?: string
+  currency?: string;
+}
+
+export interface CartItemsProps {
+  cartItems: CartItemInterface[];
+  cartData: ProductInterface[];
+  currency: string;
+}
+
+export interface CartItemInterface {
+  id: number;
+  quantity: number;
+}
+
+export interface CartInterface {
+  items: CartItemInterface[];
+  coupon: string;
 }

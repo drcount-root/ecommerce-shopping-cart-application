@@ -5,13 +5,16 @@ import { X } from "lucide-react";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { applyCouponCode } from "@/lib/store/features/cart/cartSlice";
-import { ProductInterface } from "@/interfaces";
+import {
+  CartInterface,
+  CartItemInterface,
+  ProductInterface,
+} from "@/interfaces";
 
 interface CartSummaryProps {
-  cart: any;
+  cart: CartInterface;
   cartData: ProductInterface[];
-  cartItems: any;
-  totalQuantity: number;
+  cartItems: CartItemInterface[];
   currency: string;
 }
 
@@ -19,7 +22,6 @@ const CartSummary = ({
   cart,
   cartData,
   cartItems,
-  totalQuantity,
   currency,
 }: CartSummaryProps) => {
   const [coupon, setCoupon] = useState<string>("");
@@ -30,7 +32,7 @@ const CartSummary = ({
 
   const cartTotal = cartData.reduce((acc: number, item: ProductInterface) => {
     const itemInCart = cartItems.find(
-      (cartItem: any) => cartItem.id === item.id
+      (cartItem: CartItemInterface) => cartItem.id === item.id
     );
     const quantity = itemInCart ? itemInCart.quantity : 0;
     return acc + item.price * quantity;
@@ -60,6 +62,9 @@ const CartSummary = ({
     }
   }, [dispatch]);
 
+  console.log("xcart", cart);
+  console.log("xcartItems", cartItems);
+
   return (
     <>
       {cartItems.length > 0 && (
@@ -75,6 +80,7 @@ const CartSummary = ({
                   onClick={() => {
                     dispatch(applyCouponCode(""));
                     localStorage.removeItem("appliedCoupon");
+                    setCoupon("")
                   }}
                 >
                   <X size={17} className="text-white" />
@@ -102,7 +108,9 @@ const CartSummary = ({
               </div>
             )}
           </div>
-            <p className="text-red-600 text-xs my-1 text-center">{couponMessage}</p>
+          <p className="text-red-600 text-xs my-1 text-center">
+            {couponMessage}
+          </p>
           <div className="w-full mt-4 text-sm">
             <div className="flex justify-between items-center">
               <p>Subtotal</p>
@@ -113,16 +121,20 @@ const CartSummary = ({
               </p>
             </div>
             <div className="flex justify-between items-center">
-              <div className="flex gap-2">
-              <p>Discount</p>
-              <span>(15%)</span>
-              </div>
-              <p>
-                -
-                {currency === "USD"
-                  ? "$" + (cartTotal * discount).toFixed(2)
-                  : "₹" + Math.floor(cartTotal * discount * 83.93)}
-              </p>
+              {coupon?.length > 0 && (
+                <>
+                  <div className="flex gap-2">
+                    <p>Discount</p>
+                    <span>(15%)</span>
+                  </div>
+                  <p>
+                    -
+                    {currency === "USD"
+                      ? "$" + (cartTotal * discount).toFixed(2)
+                      : "₹" + Math.floor(cartTotal * discount * 83.93)}
+                  </p>
+                </>
+              )}
             </div>
             <hr className="my-4" />
             <div className="flex justify-between items-center font-semibold">

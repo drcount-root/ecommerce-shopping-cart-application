@@ -96,7 +96,6 @@ const Cart = () => {
                   cart={cart}
                   cartData={filteredCartData}
                   cartItems={cartItems}
-                  totalQuantity={totalQuantity}
                   currency={currency}
                 />
               </div>
