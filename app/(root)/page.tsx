@@ -2,7 +2,7 @@
 
 import ProductCard from "@/components/ProductCard";
 import { ProductInterface } from "@/interfaces";
-import { dummyProductsData } from "@/dummyData";
+// import { dummyProductsData } from "@/dummyData";
 import { setTheCurrency } from "@/lib/store/features/currencySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { useEffect, useState } from "react";
