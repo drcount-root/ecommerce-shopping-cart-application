@@ -24,6 +24,9 @@ export default function RootLayout({
         <StoreProvider>
           <div className="w-full shadow-sm fixed top-0 left-0 z-20 bg-white">
             <Navbar />
+            <p className="md:hidden block text-xs bg-black text-white p-1 text-center px-2">
+              Use code SAVE15 to get extra 15% discount
+            </p>
           </div>
           {children}
           <ToastContainer />

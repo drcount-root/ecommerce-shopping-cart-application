@@ -47,7 +47,7 @@ const Home = () => {
       ) : err ? (
         <p className="text-red-600 mt-32"> Something went wrong! </p>
       ) : (
-        <main className="w-full flex flex-col items-center mb-10">
+        <main className="w-full flex flex-col items-center mb-10 mt-10 md:mt-5">
           <div className="md:w-[1200px] w-[95%] py-4 flex justify-between">
             <p className="text-base font-medium">
               Products found:

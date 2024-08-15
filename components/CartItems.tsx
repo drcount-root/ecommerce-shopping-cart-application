@@ -3,16 +3,21 @@
 import React from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
-import {
-  useAppDispatch,
-} from "@/lib/store/hooks";
+import { useAppDispatch } from "@/lib/store/hooks";
 import {
   increaseQuantity,
   decreaseQuantity,
   removeFromCart,
 } from "@/lib/store/features/cart/cartSlice";
+import { ProductInterface } from "@/interfaces";
 
-const CartItems = ({ cartItems, cartData, currency }: any) => {
+interface CartItemsProps {
+  cartItems: any;
+  cartData: ProductInterface[];
+  currency: string;
+}
+
+const CartItems = ({ cartItems, cartData, currency }: CartItemsProps) => {
   const dispatch = useAppDispatch();
 
   const handleIncreaseQuantity = (itemId: number) =>
@@ -22,14 +27,10 @@ const CartItems = ({ cartItems, cartData, currency }: any) => {
   const handleRemoveFromCart = (itemId: number) =>
     dispatch(removeFromCart(itemId));
 
-  if (cartData?.length === 0) {
-    return <p className="text-center mt-16">Your cart is empty</p>;
-  }
-
   return (
     <div className="pt-4">
       <ul>
-        {cartData?.map((item: any) => {
+        {cartData?.map((item: ProductInterface) => {
           const itemInCart = cartItems.find(
             (cartItem: any) => cartItem?.id === item?.id
           );

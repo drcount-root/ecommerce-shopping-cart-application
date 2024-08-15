@@ -25,7 +25,7 @@ const Cart = () => {
 
   const currency = useAppSelector((state) => state.currency.currency);
 
-  const [cartData, setCartData] = useState([]);
+  const [cartData, setCartData] = useState<ProductInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [err, setErr] = useState(false);
 
@@ -46,12 +46,16 @@ const Cart = () => {
       }
     };
 
-    fetchData();
+    if (cartItemIds.length > 0) {
+      fetchData();
+    } else {
+      setIsLoading(false); // No items in cart, no need to fetch
+    }
 
     return () => {
       isMounted = false;
     };
-  }, []); // Removed cartItemIds dependency here
+  }, [cartItemIds]);
 
   const filteredCartData = useMemo(
     () =>
@@ -69,14 +73,14 @@ const Cart = () => {
         </div>
       ) : err ? (
         <p className="text-red-600 mt-32"> Something went wrong! </p>
+      ) : !cartItems.length ? (
+        <p className="text-center mt-32 text-red-600">Your cart is empty</p>
       ) : (
-        <main className="w-full flex flex-col items-center">
+        <main className="w-full flex flex-col items-center mt-10 md:mt-5">
           <div className="md:w-[1200px] w-[95%] py-4">
             <p className="text-base">
               <span className="font-semibold">
-                {cartItems?.length
-                  ? totalQuantity + " items in your cart"
-                  : "Your cart is empty!"}
+                {totalQuantity} items in your cart
               </span>
             </p>
             <div className="flex gap-3 flex-col md:flex-row">
