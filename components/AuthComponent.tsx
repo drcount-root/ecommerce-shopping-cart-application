@@ -25,7 +25,10 @@ const AuthComponent = ({ type }: AuthComponentPropsInterface) => {
   };
 
   return (
-    <div className="flex justify-center items-center md:h-[90vh] h-[70vh]">
+    <div className="flex flex-col justify-center items-center md:h-[90vh] h-[70vh]">
+      <p className="text-red-500">Sorry! | Backend Is Not Implemented Yet!</p>
+      <p className="text-red-500 mb-4">Authentication UI are just for showcase</p>
+
       <div className="bg-white rounded-lg shadow-lg max-w-xs w-full">
         <h2 className="text-lg font-medium py-2 bg-black rounded-t-lg text-white text-center">
           {type === "signin" ? "Login" : "Sign Up"}
