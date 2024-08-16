@@ -11,6 +11,7 @@ import {
   ProductInterface,
 } from "@/interfaces";
 import { useRouter } from "next/navigation";
+import { setTotalAmount } from "@/lib/store/features/cart/totalamountSlice";
 
 interface CartSummaryProps {
   cart: CartInterface;
@@ -156,7 +157,10 @@ const CartSummary = ({
       </div>
       <button
         className="bg-gray-900 text-white rounded w-full py-2 mt-3 text-sm"
-        onClick={() => router.push("/checkout")}
+        onClick={() => {
+          dispatch(setTotalAmount(+discountedTotal.toFixed(2)));
+          router.push("/payment");
+        }}
       >
         Proceed to checkout
       </button>

@@ -41,8 +41,7 @@ export const cartSlice = createSlice({
       if (item) {
         if (item.quantity > 1) {
           item.quantity -= 1;
-        } 
-        else {
+        } else {
           state.items = state.items.filter((item) => item.id !== itemId);
         }
       }
@@ -50,6 +49,11 @@ export const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<number>) => {
       const itemId = action.payload;
       state.items = state.items.filter((item) => item.id !== itemId);
+    },
+
+    clearCart: (state) => {
+      state.items = [];
+      state.coupon = "";
     },
 
     applyCouponCode: (state, action: PayloadAction<string>) => {
@@ -65,6 +69,7 @@ export const {
   decreaseQuantity,
   removeFromCart,
   applyCouponCode,
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
