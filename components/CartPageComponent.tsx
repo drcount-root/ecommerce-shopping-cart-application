@@ -11,12 +11,17 @@ import { ProductInterface } from "@/interfaces";
 
 const CartPageComponent = () => {
   const cart = useAppSelector((state) => state.cart);
+  console.log("chip Cart State:", cart);
+
   const cartItems = useMemo(() => cart?.items || [], [cart?.items]);
 
   const cartItemIds = useMemo(
     () => cartItems.map((item) => item?.id),
     [cartItems]
   );
+
+  console.log("chip Cart Items:", cartItems);
+  console.log("chip Cart Item IDs:", cartItemIds);
 
   const totalQuantity = useMemo(
     () => cartItems.reduce((acc, item) => acc + item.quantity, 0),
@@ -35,6 +40,8 @@ const CartPageComponent = () => {
     const fetchData = async () => {
       try {
         const productsFromApi = await getDummyProductsApiData();
+        console.log("chip Products from API:", productsFromApi);
+
         if (isMounted && productsFromApi?.length > 0) {
           setCartData(productsFromApi);
         }
@@ -49,7 +56,7 @@ const CartPageComponent = () => {
     if (cartItemIds.length > 0) {
       fetchData();
     } else {
-      setIsLoading(false); // No items in cart, no need to fetch
+      setIsLoading(false);
     }
 
     return () => {
@@ -64,6 +71,8 @@ const CartPageComponent = () => {
       ),
     [cartData, cartItemIds]
   );
+
+  console.log("chip Filtered Cart Data:", filteredCartData);
 
   return (
     <>
