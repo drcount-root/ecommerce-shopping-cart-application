@@ -82,7 +82,7 @@ const CartPageComponent = () => {
         </div>
       ) : err ? (
         <p className="text-red-600 mt-32"> Something went wrong! </p>
-      ) : !cartItems.length ? (
+      ) : !cartItems.length && !isLoading ? (
         <p className="text-center mt-32 text-red-600">Your cart is empty</p>
       ) : (
         <main className="w-full flex flex-col items-center mt-10 md:mt-5">
