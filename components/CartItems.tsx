@@ -25,7 +25,7 @@ const CartItems = ({ cartItems, cartData, currency }: CartItemsProps) => {
   const handleRemoveFromCart = (itemId: number) =>
     dispatch(removeFromCart(itemId));
 
-  console.log("cartItemsxs", cartItems)
+  console.log("cartData check", cartData)
 
   return (
     <div className="pt-4">
