@@ -25,10 +25,10 @@ const CartAndUser = () => {
           <p>Cart</p>
         </div>
       </Link>
-      <div className="flex items-center gap-1 cursor-pointer">
+      <Link href="/sign-in" className="flex items-center gap-1 cursor-pointer">
         <User size={20} />
         <p>User</p>
-      </div>
+      </Link>
     </div>
   );
 };
